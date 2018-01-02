@@ -1,0 +1,10 @@
+- hosts: docker
+  remote_user: ec2-user
+  become: yes
+  tasks:
+  - name: ensure docker is at the latest version
+    yum: name=docker state=latest
+  - name: ensure docker is running and boots
+    service: name=docker state=started enabled=yes
+  - name: add user to docker group
+    user: name=ec2-user groups=docker append=yes
