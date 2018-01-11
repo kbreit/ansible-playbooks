@@ -1,0 +1,7 @@
+key_name: ansible-keys
+aws_region: us-east-2
+ami_id: ami-e97c548c
+subnet_id: subnet-2c22e344
+security_group: dockerSG
+instance_type: t2.micro
+ansible_ssh_private_key_file: "~/.ssh/ansible-keys"
