@@ -1,0 +1,19 @@
+- name: Delete all Docker EC2 instances
+  hosts: ec2
+  connection: local
+  gather_facts: True
+  tasks:
+    - name: EC2 facts
+      ec2_instance_facts:
+        region: "{{ aws_region }}"
+        filters:
+          "tag:function": "docker"
+      register: ec2
+    - name: Delete Docker instances
+      local_action:
+        module: ec2
+        state: absent
+        region: "{{ aws_region }}"
+        instance_ids: "{{ item.instance_id }}"
+        wait: True
+      with_items: "{{ ec2.instances }}"
