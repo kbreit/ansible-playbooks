@@ -9,7 +9,7 @@
     wait_for_instances: True
     availability_zones: ['us-east-2a', 'us-east-2b', 'us-east-2c']
     vpc_zone_identifier: '{{ vpc_zones }}'
-    desired_capacity: 1
+    desired_capacity: 2
     tags:
       - function: docker
         billingGroup: Work
@@ -32,5 +32,5 @@
     name: '{{item.network_interfaces[0].private_dns_name}}'
     groups: asg_instances
   with_items: '{{asg_instance_facts.results[0].instances}}'
-- debug:
-    var: groups.asg_instances
+# - debug:
+#     var: groups.asg_instances

@@ -1,7 +1,3 @@
 ---
 # tasks file for docker
-- name: Update all packages
-  import_tasks: redhat.yml
-  when: ansible_os_platform|lower == 'redhat'
-  import_tasks: debian.yml
-  when: ansible_os_platform|lower == 'debian'
+- include_tasks: docker-install.yml

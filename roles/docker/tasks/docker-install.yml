@@ -1,0 +1,15 @@
+- name: Install Docker and ensure it's at the latest version
+  yum:
+    name: docker
+    state: latest
+  become: true
+- service:
+    name: docker
+    state: started
+    enabled: yes
+  become: true
+- user:
+    name: ec2-user
+    groups: docker
+    append: yes
+  become: true
