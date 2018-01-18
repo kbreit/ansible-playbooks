@@ -1,0 +1,28 @@
+- name: Create Auto Scaling Group
+  debug:
+    msg: ASG is defined
+
+    # - name: Create Auto Scaling Group
+    #   local_action:
+    #     module: ec2_asg
+    #     name: dockerASG
+    #     region: '{{ aws_region }}'
+    #     launch_config_name: '{{ lc.name }}'
+    #     min_size: 1
+    #     max_size: 5
+    #     wait_for_instances: True
+    #     availability_zones: ['us-east-2a', 'us-east-2b', 'us-east-2c']
+    #     vpc_zone_identifier: '{{ vpc_zones }}'
+    #     desired_capacity: 2
+    #     tags:
+    #       - function: docker
+    #         billingGroup: Work
+    # - ec2_instance_facts:
+    #     region: us-east-2
+    #     instance_ids: '{{asg_facts.instances}}'
+    #   register: asg_instance_facts
+    # - name: Get IP addresses
+    #   add_host:
+    #     name: '{{item.private_dns_name}}'
+    #     groups: asg_instances
+    #   with_items: '{{asg_instance_facts.instances}}'

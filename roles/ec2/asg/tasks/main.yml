@@ -1,0 +1,4 @@
+---
+# tasks file for ec2
+- include_tasks: ec2-lc.yml
+- include_tasks: ec2-asg.yml

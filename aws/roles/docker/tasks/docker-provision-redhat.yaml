@@ -1,0 +1,18 @@
+- name: Add ec2-user to docker group
+  become: yes
+  user:
+    name: ec2-user
+    groups: docker
+    append: yes
+
+- name: Enable docker to start by default
+  become: yes
+  service:
+    name: docker
+    state: started
+
+- name: Enable docker to start by default
+  become: yes
+  service:
+    name: docker
+    state: started

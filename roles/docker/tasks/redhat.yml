@@ -1,0 +1,6 @@
+- name: Install RPM Python bindings
+  become: yes
+  raw: yum install rpm-python -y
+- yum:
+  name: '*'
+  state: latest

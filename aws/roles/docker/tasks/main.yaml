@@ -1,0 +1,4 @@
+- name: "Import Docker install tasks"
+  import_tasks: docker-install-redhat.yaml
+  import_tasks: docker-provision-redhat.yaml
+  when: ansible_os_platform|lower == 'redhat'

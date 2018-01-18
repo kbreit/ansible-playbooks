@@ -1,0 +1,14 @@
+- name: Create Launch Configuration
+  debug:
+    msg: LC is defined
+      # local_action:
+      #   module: ec2_lc
+      #   name: dockerLC
+      #   region: '{{ aws_region }}'
+      #   image_id: '{{ ami_id }}'
+      #   key_name: '{{ key_name }}'
+      #   security_groups: '{{ security_group_id }}'
+      #   instance_type: '{{ instance_type }}'
+      #   assign_public_ip: True
+      #   vpc_id: '{{ vpc }}'
+      # register: lc

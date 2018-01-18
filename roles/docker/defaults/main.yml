@@ -1,0 +1,6 @@
+---
+# defaults file for docker
+- username: ec2-user
+  when: ansible_os_platform|lower == 'redhat'
+- username: ubuntu
+  when: ansible_os_platform|lower == 'debian'

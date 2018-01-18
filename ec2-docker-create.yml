@@ -1,0 +1,10 @@
+- name: Create Docker instances within EC2 auto-scaling group
+  hosts: localhost
+  connection: local
+  # remote_user: '{{ username }}'
+  gather_facts: False
+  roles:
+    - { role: ec2/asg }
+  vars:
+    - { env: ec2 }
+
