@@ -6,3 +6,5 @@
     state: started
     volumes:
       - /usr/local/apache2/htdocs/
+  become: yes
+  become_user: docker

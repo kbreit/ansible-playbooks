@@ -1,0 +1,6 @@
+- name: Delete all Docker EC2 instances and related components
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  roles:
+    - { role: ec2/asg/delete }

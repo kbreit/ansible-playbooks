@@ -9,10 +9,18 @@
     enabled: yes
   become: true
 - user:
-    name: ec2-user
+    name: docker
     groups: docker
+    shell: /bin/bash
     append: yes
   become: true
+# - user:
+#     name: ec2-user
+#     groups: docker
+#     append: yes
+#   become: true
+# - name: Reset connection so group is applied to user
+#   meta: reset_connection
 - name: Install pip
   yum:
     name: python2-pip

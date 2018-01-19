@@ -4,7 +4,7 @@
   # remote_user: '{{ username }}'
   gather_facts: False
   roles:
-    - { role: ec2/asg }
+    - { role: ec2/asg/create }
   vars:
     - { env: ec2 }
 
@@ -21,3 +21,14 @@
     - { role: linux/common }
     - { role: docker/common }
     - { role: docker/httpd }
+
+# - name: Install Apache in Docker
+#   hosts: asg_instances
+#   remote_user: ec2-user
+#   gather_facts: True
+#   vars:
+#     ansible_ssh_private_key_file: "~/.ssh/ansible-keys"
+#   # tasks:
+#   # - debug:
+#   #     msg: '{{hostvars}}'
+#   roles:

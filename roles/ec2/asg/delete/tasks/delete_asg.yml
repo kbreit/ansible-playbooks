@@ -1,0 +1,5 @@
+- name: Delete Docker ASG
+  ec2_asg:
+    name: dockerASG
+    state: absent
+    region: us-east-2

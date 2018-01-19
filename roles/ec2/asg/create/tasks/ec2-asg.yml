@@ -17,26 +17,21 @@
     name: dockerASG
     region: '{{ aws_region }}'
   register: asg_facts
-# - name: Show ASG instance id's
-#   debug:
-#     msg: '{{ item.instance_id }}'
-#   with_items: '{{asg_facts.results[0].instances}}'
 - ec2_instance_facts:
     region: us-east-2
     instance_ids: '{{item.instance_id}}'
   register: asg_instance_facts
   with_items: '{{asg_facts.results[0].instances}}'
-# - debug:
-#     msg: '{{item.instances[0].private_dns_name}}'
-#   with_items: '{{asg_instance_facts.results}}'
-# - debug:
-#     msg: '{{item.network_interfaces[0].private_dns_name}}'
-#   # with_items: '{{asg_instance_facts}}'
-  # with_items: '{{asg_instance_facts.results[0].instances}}'
 - name: Get IP addresses
   add_host:
     name: '{{item.instances[0].network_interfaces[0].private_dns_name}}'
     groups: asg_instances
   with_items: '{{asg_instance_facts.results}}'
-# - debug:
-#     var: groups.asg_instances
+- name: Wait for SSH
+  wait_for:
+    host: '{{item}}'
+    port: 22
+    delay: 60
+    timeout: 320
+    state: started
+  with_items: '{{groups.asg_instances}}'
