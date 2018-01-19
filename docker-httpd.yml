@@ -1,0 +1,23 @@
+- name: Create EC2 auto-scaling group for Docker
+  hosts: localhost
+  connection: local
+  # remote_user: '{{ username }}'
+  gather_facts: False
+  roles:
+    - { role: ec2/asg }
+  vars:
+    - { env: ec2 }
+
+- name: Configure Docker instances
+  hosts: asg_instances
+  remote_user: ec2-user
+  gather_facts: True
+  vars:
+    ansible_ssh_private_key_file: "~/.ssh/ansible-keys"
+  # tasks:
+  # - debug:
+  #     msg: '{{hostvars}}'
+  roles:
+    - { role: linux/common }
+    - { role: docker/common }
+    - { role: docker/httpd }

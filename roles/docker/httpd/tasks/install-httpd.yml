@@ -1,0 +1,8 @@
+- name: Install Apache in Docker
+  docker_container:
+    name: www-server
+    image: httpd
+    published_ports: '80:80'
+    state: started
+    volumes:
+      - /usr/local/apache2/htdocs/

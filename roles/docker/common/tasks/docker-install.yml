@@ -13,3 +13,12 @@
     groups: docker
     append: yes
   become: true
+- name: Install pip
+  yum:
+    name: python2-pip
+    state: latest
+  become: true
+- name: Install Docker Python bindings
+  pip:
+    name: docker-py
+  become: true
