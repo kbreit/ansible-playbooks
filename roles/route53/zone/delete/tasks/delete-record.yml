@@ -4,5 +4,5 @@
     type: CNAME
     zone: kb-lab.net
     record: www.kb-lab.net
-    state: absent
-    value: "{{ lookup('dig', 'www.kb-lab.net./CNAME') }}"
+    state: delete
+    value: "{{ lookup('dig', 'www.kb-lab.net./CNAME') }}" # Needed because of bug 32296
