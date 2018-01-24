@@ -1,0 +1,5 @@
+- name: Delete Elastic Load Balancer
+  elb_application_lb:
+    name: dockerHTTPLB
+    state: absent
+    region: us-east-2

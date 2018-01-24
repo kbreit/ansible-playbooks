@@ -1,3 +1,4 @@
 ---
 # tasks file for delete
 - include_tasks: delete_asg.yml
+- include_tasks: delete_lc.yml

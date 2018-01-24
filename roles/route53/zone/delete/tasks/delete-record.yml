@@ -1,0 +1,8 @@
+- debug:
+    msg: "{{lookup('dig', 'www.kb-lab.net./CNAME')}}"
+- route53:
+    type: CNAME
+    zone: kb-lab.net
+    record: www.kb-lab.net
+    state: absent
+    value: "{{ lookup('dig', 'www.kb-lab.net./CNAME') }}"
