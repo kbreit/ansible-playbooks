@@ -1,0 +1,7 @@
+- route53:
+    state: create
+    type: CNAME
+    zone: kb-lab.net
+    record: www.kb-lab.net
+    value: '{{elb.dns_name}}'
+    overwrite: yes

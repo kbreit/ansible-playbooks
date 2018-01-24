@@ -2,7 +2,11 @@
 # tasks file for linux/common
 
 - name: Update all packages
-  include_tasks: redhat.yml
-  when: ansible_os_family|lower == 'redhat'
-  include_tasks: debian.yml
-  when: ansible_os_family|lower == 'debian'
+  package:
+    name: "*"
+    state: latest
+  become: yes
+#   include_tasks: redhat.yml
+#   when: ansible_os_family|lower == 'redhat'
+#   include_tasks: debian.yml
+#   when: ansible_os_family|lower == 'debian'

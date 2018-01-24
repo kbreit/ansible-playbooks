@@ -4,7 +4,9 @@
   # remote_user: '{{ username }}'
   gather_facts: False
   roles:
+    - { role: ec2/load-balancer/create }
     - { role: ec2/asg/create }
+    - { role: route53/zone/create }
   vars:
     - { env: ec2 }
 

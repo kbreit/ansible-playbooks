@@ -1,0 +1,3 @@
+---
+# tasks file for load-balancer/create
+- include_tasks: create-load-balancer.yml

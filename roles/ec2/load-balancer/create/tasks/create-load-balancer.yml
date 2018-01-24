@@ -1,0 +1,32 @@
+- name: Create ELB target group
+  local_action:
+    module: elb_target_group
+    name: dockerHTTPTG
+    state: present
+    protocol: http
+    port: 80
+    region: us-east-2
+    vpc_id: '{{vpc}}'
+  register: elb_tg
+- name: Create Elastic Load Balancer
+  local_action:
+    module: elb_application_lb
+    name: dockerHTTPLB
+    region: us-east-2
+    state: present
+    deletion_protection: no
+    listeners:
+      - Protocol: HTTP
+        Port: 80
+        DefaultActions:
+            - Type: forward
+              TargetGroupName: dockerHTTPTG
+    subnets: '{{vpc_zones}}'
+    security_groups: '{{security_group}}'
+  register: elb
+# - name: Debug ELB
+#   debug:
+#     msg: '{{elb.dns_name}}'
+# - name: Wait for load balancer to come up
+#   pause:
+#     seconds: 120

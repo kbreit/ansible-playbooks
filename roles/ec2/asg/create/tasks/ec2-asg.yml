@@ -9,6 +9,7 @@
     wait_for_instances: True
     availability_zones: ['us-east-2a', 'us-east-2b', 'us-east-2c']
     vpc_zone_identifier: '{{ vpc_zones }}'
+    target_group_arns: '{{elb_tg.target_group_arn}}'
     desired_capacity: 2
     tags:
       - function: docker
