@@ -3,3 +3,10 @@
     name: dockerHTTPLB
     state: absent
     region: us-east-2
+- pause:
+    seconds: 30
+- name: Delete target group
+  elb_target_group:
+    name: dockerHTTPTG
+    state: absent
+    region: us-east-2

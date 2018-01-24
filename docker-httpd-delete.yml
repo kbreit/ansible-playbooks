@@ -3,6 +3,6 @@
   connection: local
   gather_facts: false
   roles:
-    - { role: ec2/asg/delete }
     - { role: ec2/load-balancer/delete }
+    - { role: ec2/asg/delete }
     - { role: route53/zone/delete }

@@ -3,8 +3,3 @@
     name: dockerASG
     state: absent
     region: us-east-2
-- name: Delete target group
-  elb_target_group:
-    name: dockerHTTPTG
-    state: absent
-    region: us-east-2
