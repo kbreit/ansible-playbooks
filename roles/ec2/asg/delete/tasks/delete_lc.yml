@@ -1,0 +1,4 @@
+- ec2_lc:
+    name: dockerLC
+    region: us-east-2
+    state: absent

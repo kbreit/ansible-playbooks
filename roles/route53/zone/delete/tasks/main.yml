@@ -1,0 +1,3 @@
+---
+# tasks file for delete
+- include_tasks: delete-record.yml
