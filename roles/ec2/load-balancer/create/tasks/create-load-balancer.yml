@@ -32,4 +32,4 @@
     region: us-east-2
   register: elb_info
   until: elb_info.load_balancers[0].state.code.find('active') != -1
-  retries: 20
+  retries: 40
