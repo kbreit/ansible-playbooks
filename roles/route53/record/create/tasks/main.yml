@@ -1,4 +1,4 @@
 ---
 # tasks file for aws/route53/record/create
 
-- include_tasks: zone-register.yml
+- include_tasks: record-register.yml
