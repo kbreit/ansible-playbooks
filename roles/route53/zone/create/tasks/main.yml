@@ -1,4 +1,0 @@
----
-# tasks file for aws/route53/zone/create
-
-- include_tasks: zone-register.yml

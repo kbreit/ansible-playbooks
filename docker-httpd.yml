@@ -6,7 +6,7 @@
   roles:
     - { role: ec2/load-balancer/create }
     - { role: ec2/asg/create }
-    - { role: route53/zone/create }
+    - { role: route53/record/create }
   vars:
     - { env: ec2 }
 
