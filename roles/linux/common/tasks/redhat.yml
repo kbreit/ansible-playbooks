@@ -1,6 +1,10 @@
+- name: Check if rpm-python is installed
+  raw: yum list rpm-python
+  register: rpm_python_status
 - name: Install RPM Python bindings
   become: yes
   raw: yum install rpm-python -y
+  when: rpm_python_status.stdout.find('rpm-python.x86_64') == -1
 - name: Update packages using yum
   yum:
     name: '*'
