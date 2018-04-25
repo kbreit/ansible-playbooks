@@ -1,0 +1,23 @@
+- name: Configure CSR1000v
+  hosts: routers
+  gather_facts: no
+  connection: network_cli
+  tasks:
+    - name: Set hostname on router
+      ios_config:
+        lines: - hostname aws-csr1kv
+      become: yes
+    - name: ios_interface
+      ios_interface:
+        name: ethernet0
+        description: AWS->Public
+        state: present
+      become: yes
+    - name: Set static route
+      ios_static_route:
+        state: present
+        prefix: 192.0.2.0
+        mask: 255.255.255.0
+        next_hop: 172.16.1.1
+        admin_distance: 1
+      become: yes  
