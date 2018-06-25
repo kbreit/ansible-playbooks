@@ -1,0 +1,52 @@
+- name: Perform some basic tasks for Meraki
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: Load variables
+      include_vars:
+        file: meraki-vars.yml
+        name: auth_key
+    - name: Create sample organization
+      meraki_organization:
+        auth_key: '{{auth_key.auth_key}}'
+        state: present
+        org_name: AnsibleSampleOrg
+      delegate_to: localhost
+      register: org
+    - set_fact:
+        org_id: '{{org.data.id}}'
+    - name: Create sample wireless network
+      meraki_network:
+        auth_key: '{{auth_key.auth_key}}'
+        state: present
+        org_id: '{{org_id}}'
+        net_name: WiFiNet
+        type: wireless
+        timezone: America/Chicago
+      delegate_to: localhost
+      register: net
+    - set_fact:
+        net_id: '{{net.data.id}}'
+    - name: Create administrator
+      meraki_admin:
+        auth_key: '{{auth_key.auth_key}}'
+        state: present
+        org_name: AnsibleSampleOrg
+        name: Kevin Breit
+        orgAccess: read-only
+        email: meraki-admin@kevinbreit.net
+      delegate_to: localhost
+    - name: Set SNMP settings
+      meraki_snmp:
+        auth_key: '{{auth_key.auth_key}}'
+        state: present
+        org_id: '{{org_id}}'
+        v3_enabled: true
+        v3_auth_mode: SHA
+        v3_auth_pass: ansiblepass
+        v3_priv_mode: AES128
+        v3_priv_pass: ansiblepass
+        peer_ips: 192.0.1.1;192.0.1.2
+      delegate_to: localhost
+      register: snmp
