@@ -4,7 +4,7 @@
 - name: Install python-apt
   raw: apt install python-apt
   become: True
-  when: python-apt.stdout.find('python-apt') == -1
+  when: aptlist.stdout.find('python-apt') == -1
 - name: Update and upgrade using apt
   apt:
     update_cache: yes
