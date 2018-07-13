@@ -1,4 +1,3 @@
 - name: Update software on all Linux servers
-  hosts: home
   roles:
     - linux/common
