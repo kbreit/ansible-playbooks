@@ -1,0 +1,23 @@
+- name: Create Droplet in Digital Ocean
+  host: localhost
+  tasks:
+    - name: Check for SSH key
+      digital_ocean:
+        api_token: {{'do_api_token'}}
+        state: present
+        command: ssh
+        name: {{'do_ssh_key_name'}}
+        ssh_pub_key: {{'do_ssh_pub_key'}}
+    - name: Create Droplet
+      digital_ocean:
+        api_token: {{'do_api_token'}}
+        state: present
+        command: droplet
+        name: dev
+        size_id: 1gb
+        region_id: nyc1
+        image_id: ubuntu-18.04-x64
+        wait_timeout: 600
+      register: droplet_info
+    - debug:
+        msg: {{'droplet_info'}}
