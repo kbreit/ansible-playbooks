@@ -1,0 +1,12 @@
+---
+- name: Configure OSPF on lab routers
+  hosts: routers:cisco
+  gather_facts: no
+  pre_tasks:
+    - ios_facts:
+        gather_subset: all
+      register: net_facts
+      tags:
+        - always
+  roles:
+    - { role: cisco-ospf, facts: '{{net_facts}}' }

@@ -1,0 +1,6 @@
+- name: Enable OSPF on router
+  ios_config:
+    lines:
+      - network 172.28.0.0 0.0.255.255 area 0
+    parents: router ospf 1
+  when: '"iol" | string in facts.ansible_facts.ansible_net_image'

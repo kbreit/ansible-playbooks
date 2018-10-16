@@ -1,0 +1,6 @@
+---
+# tasks file for cisco-ospf
+- import_tasks: enable.yml
+  tags: ospf-enable
+- import_tasks: disable.yml
+  tags: ospf-disable

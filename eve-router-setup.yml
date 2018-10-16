@@ -1,0 +1,39 @@
+---
+- name: Configure new EVE-NG router
+  hosts: new_devices:cisco
+  gather_facts: no
+  tasks:
+    - debug:
+        msg: '{{ansible_host}} {{ansible_port}}'
+    - name: Setup domain information
+      telnet:
+        port: '{{ansible_port}}'
+        prompts:
+          - "[>|#]"
+        command:
+          - term length 0
+          - en
+          - conf t
+          - hostname {{inventory_hostname}}
+          - ip domain local
+          - crypto key generate rsa modulus 1024
+          - username kbreit password cisco
+          - enable password cisco
+          - line vty 0 4
+          - transport input ssh
+          - exit
+          - wr me
+    # - name: Hard return
+    #   telnet:
+    #     port: '{{ansible_port}}'
+    #     command:
+    #       - "\r"
+    # - name: Stop configuration setup
+    #   telnet:
+    #     port: '{{ansible_port}}'
+    #     # login_prompt: 'Would you like to enter the initial configuration dialog? [yes/no]'
+    #     # prompts:
+    #     #   - "[:]"
+    #     command:
+    #       - "\r"
+    #       - no

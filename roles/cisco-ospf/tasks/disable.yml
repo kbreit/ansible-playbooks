@@ -1,0 +1,8 @@
+# - debug:
+#     msg: '{{facts.ansible_facts.ansible_net_image}}'
+
+- name: Disable OSPF on router
+  ios_config:
+    lines:
+      - no router ospf 1
+  when: '"iol" | string in facts.ansible_facts.ansible_net_image'
