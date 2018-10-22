@@ -1,6 +1,6 @@
 ---
 - name: Configure OSPF on lab routers
-  hosts: routers:cisco
+  hosts: routers
   gather_facts: no
   pre_tasks:
     - ios_facts:
