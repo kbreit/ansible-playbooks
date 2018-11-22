@@ -46,7 +46,13 @@
         droplet_id: "{{droplet_info.droplet.id}}"
         droplet_ip: "{{droplet_info.droplet.ip_address}}"
     - debug:
-        msg: "'{{droplet_id}}' - '{{droplet_ip}}'"=
+        msg: "'{{droplet_id}}' - '{{droplet_ip}}'"
+    - name: Assign tag to droplet
+      digital_ocean_tag:
+        api_token: "{{do_api_token}}"
+        state: present
+        name: development
+        resource_id: "{{droplet_id}}"
     - name: Register domain with AWS Route 53
       route53:
         aws_access_key: "{{aws_access_key}}"
@@ -106,3 +112,24 @@
         user: kbreit
         state: present
         key: "{{lookup('file', public_key_file)}}"
+    - name: Install apt Python libraries
+      command: apt-get -y install python-apt python3-apt
+    - name: Install programs
+      apt:
+        state: present
+        name: "{{packages}}"
+      vars:
+        packages:
+          - tmux
+          - git
+          - vim
+    - name: Clone git repositories
+      git:
+        dest: "~/"
+        repo: "{{repos}}"
+      vars:
+        repos:
+          - git@github.com:kbreit/ansible-playbooks.git
+          - git@github.com:kbreit/ansible.git
+    - name: Add git remote for Ansible
+      command: git --work-tree ~/ansible remote add upstream git@github.com:ansible/ansible.git
